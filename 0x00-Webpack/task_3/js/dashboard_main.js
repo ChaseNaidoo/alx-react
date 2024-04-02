@@ -1,4 +1,6 @@
 import $ from "jquery";
+import '../css/main.css'
+import '../assets/holberton-logo.jpg'
 const _ = require('lodash');
 
 $('body').append('<p>Holberton Dashboard</p>');
