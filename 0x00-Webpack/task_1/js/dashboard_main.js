@@ -8,8 +8,8 @@ $('body').append('<p id=\'count\'></p>');
 $('body').append('<p>Copyright - Holberton School</p>');
 
 $('button').on('click', _.debounce(updateCounter, 500, {
-    'leading': true,
-    'trailing': false,
+  'leading': true,
+  'trailing': false,
 }));
 
 let count = 0;
