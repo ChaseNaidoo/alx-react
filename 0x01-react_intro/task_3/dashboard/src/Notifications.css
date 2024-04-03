@@ -1,0 +1,21 @@
+.Notifications {
+    padding: 20px;
+    border: 2px dotted #e0354b;
+  }
+
+  ul li[data-priority='default'] {
+    color: blue;
+  }
+  
+  ul li[data-priority='urgent'] {
+    color: red;
+  }
+  
+  .close-icon {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 20px;
+  }
