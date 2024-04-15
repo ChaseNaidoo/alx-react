@@ -69,6 +69,17 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: "1.8em",
     right: "0",
+
+    "@media (max-width: 375px)": {
+      display: "block",
+      height: "100vh",
+      width: "100vw",
+      marginLeft: "auto",
+      marginRight: "auto",
+      border: "none",
+      fontSize: "20px",
+      padding: "0",
+    },
   },
 
   "notification-header": {
@@ -78,18 +89,6 @@ const styles = StyleSheet.create({
 
   menuItem: {
     textAlign: "right",
-  },
-
-  '[data-notification-type="default"]': {
-    color: "blue",
-  },
-
-  "[data-urgent]": {
-    color: "red",
-  },
-
-  '[data-notification-type="urgent"]': {
-    color: "red",
   },
 });
 
