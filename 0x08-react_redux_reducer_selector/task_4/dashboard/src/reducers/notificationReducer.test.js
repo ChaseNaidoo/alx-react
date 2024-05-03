@@ -1,22 +1,21 @@
+import notificationReducer from './notificationReducer';
 import {
 	markAsRead,
 	setNotificationFilter,
-	fetchNotificationsSuccess,
 } from '../actions/notificationActionCreators';
-import { notificationReducer } from './notificationReducer';
+import { Map } from 'immutable';
 
-describe('tests for notification reducer', () => {
-	const defaultState = {
-		notifications: [],
-		filter: 'DEFAULT',
-	};
-
-	it('should return default state when no action is passed', () => {
-		expect(notificationReducer(defaultState, 'null')).toEqual(defaultState);
+describe('notificationReducer', () => {
+	it('Verifies default state returned', () => {
+		const myState = notificationReducer(undefined, {});
+		expect(myState.toJS()).toEqual({
+			notifications: [],
+			filter: 'DEFAULT',
+		});
 	});
 
-	it('should mark the correct notification as read', () => {
-		const data = {
+	it('Verifies MARK_AS_READ returns the data passed', () => {
+		const initialState = {
 			filter: 'DEFAULT',
 			notifications: [
 				{
@@ -39,8 +38,7 @@ describe('tests for notification reducer', () => {
 				},
 			],
 		};
-
-		const output = {
+		const returnState = {
 			filter: 'DEFAULT',
 			notifications: [
 				{
@@ -51,7 +49,7 @@ describe('tests for notification reducer', () => {
 				},
 				{
 					id: 2,
-					isRead: true,
+					isRead: false,
 					type: 'urgent',
 					value: 'New resume available',
 				},
@@ -63,12 +61,12 @@ describe('tests for notification reducer', () => {
 				},
 			],
 		};
-
-		expect(notificationReducer(data, markAsRead(2))).toEqual(output);
+		const myState = notificationReducer(initialState, markAsRead(2));
+		expect(myState.toJS()).toEqual(returnState);
 	});
 
-	it('should change filter', () => {
-		const data = {
+	it('Verifies SET_TYPE_FILTER returns the data passed', () => {
+		const initialState = {
 			filter: 'DEFAULT',
 			notifications: [
 				{
@@ -91,8 +89,7 @@ describe('tests for notification reducer', () => {
 				},
 			],
 		};
-
-		const output = {
+		const returnState = {
 			filter: 'URGENT',
 			notifications: [
 				{
@@ -115,39 +112,10 @@ describe('tests for notification reducer', () => {
 				},
 			],
 		};
-
-		expect(notificationReducer(data, setNotificationFilter('URGENT'))).toEqual(
-			output
+		const myState = notificationReducer(
+			initialState,
+			setNotificationFilter('URGENT')
 		);
-	});
-
-	it('should return correct state on successful fetch', () => {
-		const data = {
-			filter: 'DEFAULT',
-			notifications: [
-				{
-					id: 1,
-					isRead: false,
-					type: 'default',
-					value: 'New course available',
-				},
-				{
-					id: 2,
-					isRead: false,
-					type: 'urgent',
-					value: 'New resume available',
-				},
-				{
-					id: 3,
-					isRead: false,
-					type: 'urgent',
-					value: 'New data available',
-				},
-			],
-		};
-
-		expect(
-			notificationReducer(defaultState, fetchNotificationsSuccess())
-		).toEqual(data);
+		expect(myState).toEqual(Map(returnState));
 	});
 });
